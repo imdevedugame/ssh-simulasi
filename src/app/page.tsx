@@ -6,7 +6,7 @@ export default function Home() {
   const [output, setOutput] = useState([]);
   const [isBruteForcing, setIsBruteForcing] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [prompt, setPrompt] = useState('$'); // State untuk mengelola prompt
+  const [prompt, setPrompt] = useState('$');
 
   const wordlist = [
     'password123',
@@ -16,7 +16,7 @@ export default function Home() {
     'admin',
     'qwerty',
     'Mitha',
-    'Mitha'// pastikan Mitha berada di akhir agar brute force menunggu sampai menemukan ini
+    'Mitha'
   ];
 
   const handleCommand = (e) => {
@@ -31,7 +31,7 @@ export default function Home() {
       setOutput([...output, `Brute-forcing password using wordlist: ${command}...`]);
       simulateBruteForce();
     } else if (command === 'session 1' && isSuccess) {
-      setPrompt('$session1>'); // Ubah prompt menjadi $session1>
+      setPrompt('$session1>');
     } else if (command === 'whoami' && prompt === '$session1>') {
       setOutput(prevOutput => [...prevOutput, 
         `Nama: Mitha`,
@@ -66,7 +66,7 @@ export default function Home() {
         clearInterval(bruteForceInterval);
         setIsBruteForcing(false);
       }
-    }, 1000); // setiap 1 detik, coba password berikutnya
+    }, 1000); 
   };
 
   return (
