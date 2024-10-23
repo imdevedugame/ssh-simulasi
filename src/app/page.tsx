@@ -1,6 +1,8 @@
 "use client";
 import { useState } from 'react';
 
+import react from 'react';
+
 export default function Home() {
   const [command, setCommand] = useState('');
   const [output, setOutput] = useState([]);
@@ -19,33 +21,34 @@ export default function Home() {
     'Mitha'
   ];
 
-  const handleCommand = (e) => {
-    e.preventDefault();
+ const handleCommand = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
 
-    if (command === 'ssh imvanz@192.168.62.01') {
-      setOutput([...output, `Enter password:`]);
-    } else if (command === 'Mitha' && !isBruteForcing) {
-      setOutput(prevOutput => [...prevOutput, `Success! Kamu berhasil masuk ke dalam hatinya.`]);
-      setIsSuccess(true);
-    } else if (command.startsWith('/usr/etc/wordlist/') && !isBruteForcing) {
-      setOutput([...output, `Brute-forcing password using wordlist: ${command}...`]);
-      simulateBruteForce();
-    } else if (command === 'session 1' && isSuccess) {
-      setPrompt('$session1>');
-    } else if (command === 'whoami' && prompt === '$session1>') {
-      setOutput(prevOutput => [...prevOutput, 
-        `Nama: Mitha`,
-        `Lahir: Jogja`,
-        `Sekolah: UDINUS`,
-        `Ormawa: HMSYSFO`,
-        `Selamat, anda berhasil memilikinya.`
-      ]);
-    } else {
-      setOutput(prevOutput => [...prevOutput, `Command not found: ${command}`]);
-    }
+  if (command === 'ssh imvanz@192.168.62.01') {
+    setOutput([...output, `Enter password:`]);
+  } else if (command === 'Mitha' && !isBruteForcing) {
+    setOutput(prevOutput => [...prevOutput, `Success! Kamu berhasil masuk ke dalam hatinya.`]);
+    setIsSuccess(true);
+  } else if (command.startsWith('/usr/etc/wordlist/') && !isBruteForcing) {
+    setOutput([...output, `Brute-forcing password using wordlist: ${command}...`]);
+    simulateBruteForce();
+  } else if (command === 'session 1' && isSuccess) {
+    setPrompt('$session1>');
+  } else if (command === 'whoami' && prompt === '$session1>') {
+    setOutput(prevOutput => [...prevOutput, 
+      `Nama: Mitha`,
+      `Lahir: Jogja`,
+      `Sekolah: UDINUS`,
+      `Ormawa: HMSYSFO`,
+      `Selamat, anda berhasil memilikinya.`
+    ]);
+  } else {
+    setOutput(prevOutput => [...prevOutput, `Command not found: ${command}`]);
+  }
 
-    setCommand('');
-  };
+  setCommand('');
+};
+
 
   const simulateBruteForce = () => {
     setIsBruteForcing(true);
